@@ -7,7 +7,7 @@ var permutations = function(letters) {
     var withoutLetter = permutations(rest(letters, i));
 
     // Append letter to each permutation in pRest
-    withLetter = withoutLetter.map(function(permutation) {
+    var withLetter = withoutLetter.map(function(permutation) {
       permutation.unshift(letter);
       return permutation;
     });
