@@ -1,8 +1,8 @@
 ;(function(exports) {
-  var Wordplay = require('../wordplay/wordplay');
+  var wordplay = require('../wordplay/wordplay');
 
   describe('permutations', function() {
-    var permutations = Wordplay.permutations;
+    var permutations = wordplay.permutations;
 
     it('should return the permutations for 0 elements', function() {
       var a = [];
