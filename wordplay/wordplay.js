@@ -1,26 +1,25 @@
+var Scrabble = require('./scrabble');
+
 var Wordplay = {
   permutations: function(array) {
-    if (array.length < 2) {
-      return [array];
-    } else if (array.length === 2) {
-      return [array, swapped(array, 0, 1)];
-    } else {
-      return array.reduce(function(result, e, i, a) {
-        // Permute the rest
-        var pRest = Wordplay.permutations(rest(a, i));
+    if (array.length < 2) return [array];
+    if (array.length === 2) return [array, swapped(array, 0, 1)];
+    return array.reduce(function(result, e, i, a) {
+      // Permute the rest
+      var pRest = Wordplay.permutations(rest(a, i));
 
-        // Append e to each permutation in pRest
-        pElement = pRest.map(function(p) {
-          p.unshift(e);
-          return p;
-        });
+      // Append e to each permutation in pRest
+      pElement = pRest.map(function(p) {
+        p.unshift(e);
+        return p;
+      });
 
-        // Add permutations for e to result
-        return result.concat(pElement);
-      }, []);
-    }
+      // Add permutations for e to result
+      return result.concat(pElement);
+    }, []);
   }
 };
+
 
 var copy = function(array) {
   return array.slice(0);

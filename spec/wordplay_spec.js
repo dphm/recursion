@@ -1,5 +1,5 @@
 ;(function(exports) {
-  var Wordplay = require('../wordplay');
+  var Wordplay = require('../wordplay/wordplay');
 
   describe('permutations', function() {
     var permutations = Wordplay.permutations;
