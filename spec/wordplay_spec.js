@@ -61,4 +61,31 @@
     });
   });
 
+  describe('combinations', function() {
+    var combinations = wordplay.combinations;
+
+    it('should return the combinations for 0 elements', function() {
+      var a = [];
+      expect(combinations(a)).toEqual([[]]);
+    });
+
+    it('should return the combinations for 1 element', function() {
+      var a = ['A'];
+      var c = [[],
+               ['A']];
+      expect(combinations(a).sort().join('|')).toEqual(c.sort().join('|'));
+    });
+
+    it('should return the combinations for 2 elements', function() {
+      var a = ['A', 'B'];
+      var c = [[], ['A'], ['B'], ['A', 'B']];
+      expect(combinations(a).sort().join('|')).toEqual(c.sort().join('|'));
+    });
+
+    it('should return the combinations for 3 elements', function() {
+      var a = ['A', 'B', 'C'];
+      var c = [[], ['A'], ['B'], ['C'], ['B', 'C'], ['A', 'C'], ['A', 'B'], ['A', 'B', 'C']];
+      expect(combinations(a).sort().join('|')).toEqual(c.sort().join('|'));
+    });
+  });
 })(this);

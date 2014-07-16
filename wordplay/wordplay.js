@@ -12,6 +12,16 @@ var permutations = function(letters) {
   }, []);
 };
 
+var combinations = function(letters) {
+  if (letters.length < 1) return [[]];
+  var withoutLetter = combinations(tail(letters));
+  var withLetter = copy(withoutLetter).map(function(combination) {
+    combination.unshift(head(letters));
+    return combination;
+  });
+  return [].concat(withLetter, withoutLetter);
+};
+
 /**
  * Array helper functions
  */
@@ -36,5 +46,6 @@ var copy = function(array) {
 };
 
 module.exports = {
-  permutations: permutations
+  permutations: permutations,
+  combinations: combinations
 };
