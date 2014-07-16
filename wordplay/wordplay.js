@@ -22,6 +22,12 @@ var combinations = function(letters) {
   return [].concat(withLetter, withoutLetter);
 };
 
+var seriesOfLetters = function(letters) {
+  return combinations(letters).reduce(function(result, combination) {
+    return result.concat(permutations(combination));
+  }, []);
+};
+
 /**
  * Array helper functions
  */
@@ -47,5 +53,6 @@ var copy = function(array) {
 
 module.exports = {
   permutations: permutations,
-  combinations: combinations
+  combinations: combinations,
+  seriesOfLetters: seriesOfLetters
 };

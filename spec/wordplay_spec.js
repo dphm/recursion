@@ -88,4 +88,44 @@
       expect(combinations(a).sort().join('|')).toEqual(c.sort().join('|'));
     });
   });
+
+  describe('seriesOfLetters', function() {
+    var seriesOfLetters = wordplay.seriesOfLetters;
+
+    it('should return the permutations of combinations for 0 elements', function() {
+      var a = [];
+      var s = [[]];
+      expect(seriesOfLetters(a)).toEqual(s);
+    });
+
+    it('should return the permutations of combinations for 1 element', function() {
+      var a = ['A'];
+      var s = [[], ['A']];
+      expect(seriesOfLetters(a).sort().join('|')).toEqual(s.sort().join('|'));
+    });
+
+    it('should return the permutations of combinations for 2 elements', function() {
+      var a = ['A', 'B'];
+      var s = [[], ['A'], ['B'], ['A', 'B'], ['B', 'A']];
+      expect(seriesOfLetters(a).sort().join('|')).toEqual(s.sort().join('|'));
+    });
+
+    it('should return the permutations of combinations for 3 elements', function() {
+      var a = ['A', 'B', 'C'];
+      var s = [[], ['A'], ['B'], ['C'],
+               ['A', 'B'],
+               ['B', 'A'],
+               ['B', 'C'],
+               ['C', 'B'],
+               ['A', 'C'],
+               ['C', 'A'],
+               ['A', 'B', 'C'],
+               ['A', 'C', 'B'],
+               ['B', 'C', 'A'],
+               ['B', 'A', 'C'],
+               ['C', 'A', 'B'],
+               ['C', 'B', 'A']];
+      expect(seriesOfLetters(a).sort().join('|')).toEqual(s.sort().join('|'));
+    });
+  });
 })(this);
