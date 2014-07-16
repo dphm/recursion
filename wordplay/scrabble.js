@@ -62,6 +62,12 @@ Scrabble.Bag.prototype = {
 };
 
 Scrabble.Hand.prototype = {
+  letters: function() {
+    return this.tiles.map(function(tile) {
+      return tile.letter;
+    });
+  },
+
   add: function(tiles) {
     this.tiles = this.tiles.concat(tiles);
     this.tiles = this.tiles.slice(0, 7);
@@ -90,14 +96,3 @@ Scrabble.Hand.prototype = {
 }
 
 module.exports = Scrabble;
-
-var bag = new Scrabble.Bag();
-var hand = new Scrabble.Hand(bag);
-console.log(hand.tiles);
-console.log(bag.tiles);
-
-console.log(hand.tiles[0]);
-hand.play([hand.tiles[0].letter]);
-
-hand.add(bag.drawTiles(2));
-console.log(hand.tiles);
