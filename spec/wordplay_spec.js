@@ -10,53 +10,53 @@
     });
 
     it('should return the permutations for 1 element', function() {
-      var a = [0];
-      expect(permutations(a)).toEqual([[0]]);
+      var a = ['A'];
+      expect(permutations(a)).toEqual([['A']]);
     });
 
     it('should return the permutations for 2 elements', function() {
-      var a = [0, 1];
-      var p = [[0, 1], [1, 0]];
+      var a = ['A', 'B'];
+      var p = [['A', 'B'], ['B', 'A']];
       expect(permutations(a)).toEqual(p);
     });
 
     it('should return the permutations for 3 elements', function() {
-      var a = [0, 1, 2];
-      var p = [[0, 1, 2],
-               [0, 2, 1],
-               [1, 2, 0],
-               [1, 0, 2],
-               [2, 0, 1],
-               [2, 1, 0]];
+      var a = ['A', 'B', 'C'];
+      var p = [['A', 'B', 'C'],
+               ['A', 'C', 'B'],
+               ['B', 'C', 'A'],
+               ['B', 'A', 'C'],
+               ['C', 'A', 'B'],
+               ['C', 'B', 'A']];
       expect(permutations(a).sort().join('|')).toEqual(p.sort().join('|'));
     });
 
     it('should return the permutations for 4 elements', function() {
-      var a = [0, 1, 2, 3];
-      var p = [[0, 1, 2, 3],
-               [0, 1, 3, 2],
-               [0, 2, 1, 3],
-               [0, 2, 3, 1],
-               [0, 3, 1, 2],
-               [0, 3, 2, 1],
-               [1, 0, 2, 3],
-               [1, 0, 3, 2],
-               [1, 2, 0, 3],
-               [1, 2, 3, 0],
-               [1, 3, 0, 2],
-               [1, 3, 2, 0],
-               [2, 0, 1, 3],
-               [2, 0, 3, 1],
-               [2, 1, 0, 3],
-               [2, 1, 3, 0],
-               [2, 3, 0, 1],
-               [2, 3, 1, 0],
-               [3, 0, 1, 2],
-               [3, 0, 2, 1],
-               [3, 1, 0, 2],
-               [3, 1, 2, 0],
-               [3, 2, 0, 1],
-               [3, 2, 1, 0]];
+      var a = ['A', 'B', 'C', 'D'];
+      var p = [['A', 'B', 'C', 'D'],
+               ['A', 'B', 'D', 'C'],
+               ['A', 'C', 'B', 'D'],
+               ['A', 'C', 'D', 'B'],
+               ['A', 'D', 'B', 'C'],
+               ['A', 'D', 'C', 'B'],
+               ['B', 'A', 'C', 'D'],
+               ['B', 'A', 'D', 'C'],
+               ['B', 'C', 'A', 'D'],
+               ['B', 'C', 'D', 'A'],
+               ['B', 'D', 'A', 'C'],
+               ['B', 'D', 'C', 'A'],
+               ['C', 'A', 'B', 'D'],
+               ['C', 'A', 'D', 'B'],
+               ['C', 'B', 'A', 'D'],
+               ['C', 'B', 'D', 'A'],
+               ['C', 'D', 'A', 'B'],
+               ['C', 'D', 'B', 'A'],
+               ['D', 'A', 'B', 'C'],
+               ['D', 'A', 'C', 'B'],
+               ['D', 'B', 'A', 'C'],
+               ['D', 'B', 'C', 'A'],
+               ['D', 'C', 'A', 'B'],
+               ['D', 'C', 'B', 'A']];
       expect(permutations(a).sort().join('|')).toEqual(p.sort().join('|'));
     });
   });
