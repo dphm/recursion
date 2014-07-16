@@ -1,6 +1,4 @@
-var Scrabble = require('./scrabble');
-
-var permutations = function(letters) {
+function permutations(letters) {
   if (letters.length < 1) return [[]];
   return letters.reduce(function(result, letter, i, letters) {
     var withoutLetter = permutations(others(letters, i));
@@ -10,9 +8,9 @@ var permutations = function(letters) {
     });
     return result.concat(withLetter);
   }, []);
-};
+}
 
-var combinations = function(letters) {
+function combinations(letters) {
   if (letters.length < 1) return [[]];
   var withoutLetter = combinations(tail(letters));
   var withLetter = copy(withoutLetter).map(function(combination) {
@@ -20,36 +18,36 @@ var combinations = function(letters) {
     return combination;
   });
   return [].concat(withLetter, withoutLetter);
-};
+}
 
-var seriesOfLetters = function(letters) {
+function seriesOfLetters(letters) {
   return combinations(letters).reduce(function(result, combination) {
     return result.concat(permutations(combination));
   }, []);
-};
+}
 
 /**
  * Array helper functions
  */
 
-var head = function(array) {
+function head(array) {
   return array[0];
-};
+}
 
-var tail = function(array, i) {
+function tail(array, i) {
   return array.slice(1);
-};
+}
 
-var others = function(array, i) {
+function others(array, i) {
   return array.slice(0, i).concat(array.slice(i + 1));
-};
+}
 
-var copy = function(array) {
+function copy(array) {
   return array.map(function(e) {
     if (e instanceof Array) return copy(e);
     return e;
   });
-};
+}
 
 module.exports = {
   permutations: permutations,
