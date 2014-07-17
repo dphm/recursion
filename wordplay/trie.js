@@ -8,41 +8,50 @@ var Trie = function(value, children) {
 };
 
 function insert(trie, str) {
-  // String already in trie
-  if (lookup(trie, str)) return trie;
-  
-  var t = copy(trie);
-  if (str.length > 0) {
-    t[CHILDREN].push(insert(new Trie(head(str)), tail(str)));
+  var match = lowestMatch({ trie: trie, str: str });
+  if (match.str.length > 0) {
+    match.trie[CHILDREN].push(toTrie(match.str));
   } else {
-    t[CHILDREN].push(null);
+    match.trie[CHILDREN].push([null]);
   }
-  return t;
+  return trie;
 }
 
-function lookup(tries, str) {
-  // Ignore root trie
-  if (tries[VALUE] === '') return lookup(tries[CHILDREN], str);
-
-  if (str.length > 0) {
-    function matchesPrefix(trie) { return trie !== null && trie[VALUE] === head(str); }
-    function matchesRest(trie) { return lookup(trie[CHILDREN], tail(str)); }
-    function matchesString(trie) { return matchesPrefix(trie) && matchesRest(trie); }
-    return tries.some(matchesString);
-  } else {
-    function matchesEnd(trie) { return trie === null; }
-    return tries.some(matchesEnd);
-  }
+function lookup(trie, str) {
+  return lowestMatch({ trie: trie, str: str }).trie === null;
 }
 
 /**
  * Trie helper functions
  */
 
-function copy(trie) {
-  if (!trie) return trie;
-  var children = trie[CHILDREN].map(function(child) { return copy(child) });
-  return new Trie(trie[VALUE], children);
+function matchesValue(trie, value) {
+  return trie[VALUE] === value;
+}
+
+function matchesEnd(trie) {
+  return trie[CHILDREN].some(function(child) { return child === null });
+}
+
+function matchFirstChar(tries, str) {
+  var matches = tries.filter(function(trie) {
+    return trie !== null && matchesValue(trie, head(str));
+  });
+  if (matches.length > 0) return matches[0];
+  return false;
+}
+
+function lowestMatch(data) {
+  var trie = data.trie;
+  var str = data.str;
+
+  if (str.length > 0) {
+    var match = matchFirstChar(trie[CHILDREN], str);
+    if (match) return lowestMatch({ trie: match, str: tail(str) });
+    return { trie: trie, str: str };
+  }
+  if (matchesEnd(trie)) return { trie: null, str: str };
+  return { trie: trie, str: str };
 }
 
 /**
@@ -57,4 +66,13 @@ function tail(str) {
   return str.slice(1);
 }
 
-module.exports = Trie;
+function toTrie(str) {
+  if (str.length > 0) return new Trie(head(str), [toTrie(tail(str))]);
+  return null;
+}
+
+module.exports = {
+  Trie: Trie,
+  insert: insert,
+  lookup: lookup
+};
