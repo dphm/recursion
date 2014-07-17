@@ -10,9 +10,9 @@ var Trie = function(value, children) {
 function insert(trie, str) {
   var match = lowestMatch({ trie: trie, str: str });
   if (match.str.length > 0) {
-    match.trie[CHILDREN].push(toTrie(match.str));
+    if (match.trie) match.trie[CHILDREN].push(toTrie(match.str));
   } else {
-    match.trie[CHILDREN].push([null]);
+    if (match.trie) match.trie[CHILDREN].push([null]);
   }
   return trie;
 }
